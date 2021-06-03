@@ -1,0 +1,46 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _setup = require('./setup');
+require('./ghostmoves');
+class Ghost {
+  constructor(speed = 5, startPos, movement, name) {
+    this.name = name;
+    this.movement = movement;
+    this.startPos = startPos;
+    this.pos = startPos;
+    this.dir = _setup.DIRECTIONS.ArrowRight;
+    this.speed = speed;
+    this.timer = 0;
+    this.isScared = false;
+    this.rotation = false;
+  }
+  shouldMove() {
+    if (this.timer === this.speed) {
+      this.timer = 0;
+      return true;
+    }
+    this.timer++;
+  }
+  getNextMove(objectExist) {
+    // Call move algoritm here
+    const {nextMovePos, direction} = this.movement(this.pos, this.dir, objectExist);
+    return {
+      nextMovePos,
+      direction
+    };
+  }
+  makeMove() {
+    const classesToRemove = [_setup.OBJECT_TYPE.GHOST, _setup.OBJECT_TYPE.SCARED, this.name];
+    let classesToAdd = [_setup.OBJECT_TYPE.GHOST, this.name];
+    if (this.isScared) classesToAdd = [...classesToAdd, _setup.OBJECT_TYPE.SCARED];
+    return {
+      classesToRemove,
+      classesToAdd
+    };
+  }
+  setNewPos(nextMovePos, direction) {
+    this.pos = nextMovePos;
+    this.dir = direction;
+  }
+}
+exports.default = Ghost;

@@ -1,0 +1,24 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "randomMovement", function () {
+  return randomMovement;
+});
+var _setup = require('./setup');
+function randomMovement(position, direction, objectExist) {
+  let dir = direction;
+  let nextMovePos = position + dir.movement;
+  // Create an array from the diretions objects keys
+  const keys = Object.keys(_setup.DIRECTIONS);
+  while (objectExist(nextMovePos, _setup.OBJECT_TYPE.WALL) || objectExist(nextMovePos, _setup.OBJECT_TYPE.GHOST)) {
+    // Get a random key from that array
+    const key = keys[Math.floor(Math.random() * keys.length)];
+    // Set the new direction
+    dir = _setup.DIRECTIONS[key];
+    // Set the next move
+    nextMovePos = position + dir.movement;
+  }
+  return {
+    nextMovePos,
+    direction: dir
+  };
+}

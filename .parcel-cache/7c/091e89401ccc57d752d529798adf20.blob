@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pacman</title>
+    <link rel="stylesheet" type="text/css" href="e4bf09b61ab884c61a649b52903c2aa8">
+</head><body>
+
+    <div id="wrapper">
+        <div id="game"></div>
+        <div id="score"></div>
+        <button id="start-button">Start Game</button>
+    </div>
+    <script src="4446f5e227c2c938d062e7ce10c1adbe"></script>
+
+</body>
